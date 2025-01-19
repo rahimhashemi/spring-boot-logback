@@ -1,0 +1,37 @@
+<configuration>
+    <appender name="APP_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/app.log</file>
+        <encoder charset="UTF-8" class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>
+                %X{intcustomerid}~%X{step}~%X{systemtype}%n
+            </pattern>
+        </encoder>
+
+        <!-- Rolling policy -->
+<!--        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+<!--            &lt;!&ndash; Archive log files with date and index &ndash;&gt;-->
+<!--            <fileNamePattern>logs/archive/app.log-%d{yyyy-MM-dd}.%i.zip</fileNamePattern>-->
+<!--            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">-->
+<!--                <maxFileSize>10MB</maxFileSize>-->
+<!--            </timeBasedFileNamingAndTriggeringPolicy>-->
+<!--        </rollingPolicy>-->
+        <!-- Simple rolling policy: Roll logs daily -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/archive/app.log-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <!-- Define the logger -->
+    <logger name="APP_LOGGER2" level="INFO" additivity="false">
+        <appender-ref ref="APP_APPENDER"/>
+    </logger>
+
+    <!-- Root logger -->
+<!--    <root level="INFO">-->
+<!--        <appender-ref ref="APP_APPENDER"/>-->
+<!--    </root>-->
+<!--    <root level="DEBUG">-->
+<!--        <appender-ref ref="FILE"/>-->
+<!--    </root>-->
+</configuration>
